@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
-#include <vector>
+
 #include "functions.cpp"
 using namespace std;
 
@@ -16,31 +16,67 @@ int main() {
 	int year,month,day;
 	Event evs ;
 	int choix;
-
-
-
-
+	char choose;
 
 	if(isleapyear (year)==true)  {
 		DAYS_IN_MONTH[1]=29;
 	}
 	while (end_prog!=1 ) {
+		year = getCurrentYear() ;
+		month = getCurrentMonth();
 
-
-		evs.setNumEvents(0);
-		cout << "Enter a year: ";
-		cin >> year;
-		system("cls");
-
+		char choose;
+		if (choose !='a'){
+			
+	
 		do {
+			system("cls");
+			afficher(year,month-1);
+			cout<<" tap n for the next month \n tap p for the privious month\n tap d to choose a day in this month \n tap a to choose the date manually \n tap e to close the app\n";
+			cin>>choose;
+			if (choose=='n') {
+				if (month==12) {
+					year++;
+					month =1;
+					}
+				 else
+					month++;
+			}
 
-			cout<<"choose a month (the number of the month) :  "<<endl;
+			else if (choose =='p') {
+				if (month ==1) {
+					year--;
+					month = 12;
+				}
+				else
+				month--;
 
-			cin>>month;
-		} while ((month>12) || (month<1)) ;
+			}
+			else if (choose!='a' && choose !='d')
+			return 0 ;
 
+
+		} while(choose!='a'&& choose!='d');
+			}
 		system("cls");
-		afficher(year,month-1);
+
+		if (choose =='a') {
+
+			evs.setNumEvents(0);
+			cout << "Enter a year: ";
+			cin >> year;
+			system("cls");
+
+			do {
+
+				cout<<"choose a month (the number of the month) :  "<<endl;
+
+				cin>>month;
+			} while ((month>12) || (month<1)) ;
+
+			system("cls");
+			afficher(year,month-1);
+		}
 		cout<<endl<<"choose the day  : ";
 		cin>>day;
 		DayOfWeek firstDay = dayOfWeek(year, month, day);
@@ -48,11 +84,10 @@ int main() {
 		evs.setAtts(year,day,month);
 		cout<<DAY_NAMES[firstDay-1]<<" "<<day<<"/"<<month<<"/"<<year<<endl;
 
-		if (search_date(day,month, year)!=-1){
-	        cout<<"the eventes for this date are :"<<endl;
+		if (search_date(day,month, year)!=-1) {
+			cout<<"the eventes for this date are :"<<endl;
 			printEventsForDate(day,  month,  year);
-				}
-			else 
+		} else
 			cout<<"there is no eventes for this date"<<endl;
 		choix = menu();
 		switch(choix) {
@@ -92,13 +127,13 @@ int main() {
 				break;
 			}
 		}
-		if (choix!=3){
-		
-		cout<<" \n \n enter 0 to continue \n enter 1 to close the app"<<endl;
-		cin>>end_prog;
-	
+		if (choix!=3) {
+
+			cout<<" \n \n enter 0 to continue \n enter 1 to close the app"<<endl;
+			cin>>end_prog;
+
 		}
-			system("cls");
+		system("cls");
 	}
 
 	return 0;

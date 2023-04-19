@@ -3,8 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
-#include <vector>
-#include <string>
+#include <ctime>
+
 #include "classes.h"
 
 using namespace std;
@@ -137,7 +137,16 @@ int search_date(int day, int month, int year) {
 	file.close();
 	return -1;
 }
-
+int getCurrentYear() {
+    time_t now = time(nullptr);
+    tm* localTime = localtime(&now);
+    return localTime->tm_year + 1900; 
+}
+int getCurrentMonth() {
+    time_t now = time(nullptr);
+    tm* localTime = localtime(&now);
+    return localTime->tm_mon + 1; 
+}
 void printLinesFromFile(int start_line, int num_lines) {
 	string line;
 
