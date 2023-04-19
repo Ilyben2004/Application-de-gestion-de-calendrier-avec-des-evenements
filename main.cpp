@@ -26,38 +26,36 @@ int main() {
 		month = getCurrentMonth();
 
 		char choose;
-		if (choose !='a'){
-			
-	
-		do {
-			system("cls");
-			afficher(year,month-1);
-			cout<<" tap n for the next month \n tap p for the privious month\n tap d to choose a day in this month \n tap a to choose the date manually \n tap e to close the app\n";
-			cin>>choose;
-			if (choose=='n') {
-				if (month==12) {
-					year++;
-					month =1;
-					}
-				 else
-					month++;
-			}
+		if (choose !='a') {
 
-			else if (choose =='p') {
-				if (month ==1) {
-					year--;
-					month = 12;
+
+			do {
+				system("cls");
+				afficher(year,month-1);
+				cout<<endl;
+				choose=menu2();
+				if (choose=='n') {
+					if (month==12) {
+						year++;
+						month =1;
+					} else
+						month++;
 				}
-				else
-				month--;
 
-			}
-			else if (choose!='a' && choose !='d')
-			return 0 ;
+				else if (choose =='p') {
+					if (month ==1) {
+						year--;
+						month = 12;
+					} else
+						month--;
+
+				} else if (choose!='a' && choose !='d')
+					return 0 ;
 
 
-		} while(choose!='a'&& choose!='d');
-			}
+
+			} while(choose!='a'&& choose!='d');
+		}
 		system("cls");
 
 		if (choose =='a') {
@@ -77,8 +75,11 @@ int main() {
 			system("cls");
 			afficher(year,month-1);
 		}
-		cout<<endl<<"choose the day  : ";
-		cin>>day;
+		do {
+			cout<<endl<<"choose the day  : ";
+			cin>>day;
+		} while( day>DAYS_IN_MONTH[month-1] || day<1);
+
 		DayOfWeek firstDay = dayOfWeek(year, month, day);
 		system("cls");
 		evs.setAtts(year,day,month);
@@ -127,7 +128,7 @@ int main() {
 				break;
 			}
 		}
-		if (choix!=3) {
+		if (choix!=3 && choix!=4) {
 
 			cout<<" \n \n enter 0 to continue \n enter 1 to close the app"<<endl;
 			cin>>end_prog;

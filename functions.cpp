@@ -364,12 +364,26 @@ void afficher(int year,int month ) {
 
 
 }
+
+char menu2(){
+char choose ;
+cout << "============================================" << endl;
+    cout << "          Calendar App - Main Menu           " << endl;
+    cout << "============================================" << endl;
+    cout << "Please choose one of the following options: " << endl;
+    cout << "n: Next Month" << endl;
+    cout << "p: Previous Month" << endl;
+    cout << "d: Choose a Day in this Month" << endl;
+    cout << "a: Choose the Date Manually" << endl;
+    cout << "e: Exit the App" << endl;
+    cout << "============================================" << endl;
+    cout << "Your Choice: ";
+				cin>>choose;
+				return choose;
+}
 int menu () {
 	int choix;
-	cout<<endl<<endl<<endl<<"enter 1 to add an event"<<endl;
-	cout<<"enter 2 to delete an event"<<endl;
-	cout<<"enter 3 to choose another day "<<endl;
-	cout<<"enter 4 to close the app "<<endl;
+	cout <<endl<< "What would you like to do?\n"<< "1. Add an event\n"<< "2. Delete an event\n"<< "3. Choose another day\n"<< "4. Close the app\n"<< "Please enter your choice (1-4): ";
 	cin>>choix;
 	return choix;
 }
